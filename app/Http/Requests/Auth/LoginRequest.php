@@ -22,14 +22,29 @@ class LoginRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     * @return array<string, \Illuminate\Contracts\Validation\Rule|array|string>
      */
     public function rules(): array
     {
-        return [
+        // Determine if barangay_id is required based on the email domain or user role
+        $rules = [
             'email' => ['required', 'string', 'email'],
             'password' => ['required', 'string'],
         ];
+
+        // Check if the email belongs to a superadmin or not
+        // You can adjust this check according to your actual logic or data source
+        $user = \App\Models\User::where('email', $this->input('email'))->first();
+        
+        if ($user && $user->hasRole('superAdmin')) {
+            // Skip barangay_id validation for superadmin
+            return $rules;
+        }
+
+        // Add barangay_id validation for non-superadmin users
+        $rules['barangay_id'] = ['required', 'exists:barangays,id'];
+        
+        return $rules;
     }
 
     /**
@@ -46,6 +61,14 @@ class LoginRequest extends FormRequest
 
             throw ValidationException::withMessages([
                 'email' => trans('auth.failed'),
+            ]);
+        }
+
+        if (!Auth::user()->is_active) {
+            Auth::logout();
+
+            throw ValidationException::withMessages([
+                'email' => 'Your account is inactive. Please contact the administrator.',
             ]);
         }
 

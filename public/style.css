@@ -1,0 +1,77 @@
+#main {
+    min-height: 100svh;
+    display: grid;
+    grid-template-columns: 250px 1fr;
+}
+
+#sidebar {
+    background-color: rgb(98, 178, 239);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#branding {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    color: #888;
+}
+
+#main-nav {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 24px;
+}
+
+#main-nav a {
+    display: flex;
+    font-size: 20px;
+    align-items: center;
+    text-decoration: none;
+    color:white;
+    padding: 15px; /* Adjust as needed */
+}
+
+#main-nav form {
+    width: 100px;
+    margin:auto;
+    border: 1px solid green;
+    background-color: rgb(98, 178, 239);
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.8), 0 0 20px rgba(0, 255, 0, 0.8), 0 0 30px rgba(0, 255, 0, 0.8);
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 9px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* #main-nav form:hover {
+    color: white;
+    
+} */
+
+#main-nav svg {
+    margin-right: 8px; /* Adjust as needed */
+}
+
+#main-nav a:hover {
+    background-color: rgb(20, 140, 20);
+    color: white;
+    padding:10px;
+    border-radius: 9px;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.8), 0 0 20px rgba(0, 255, 0, 0.8), 0 0 30px rgba(0, 255, 0, 0.8);
+}
+.Landing-main {
+    gap: 20px;
+    justify-content: center; /* Centers content horizontally */
+    align-items: center; 
+}
+
+.Landing-Container {
+    border: 1px solid black;
+    width: 150px;
+    height: 100px;
+    border-radius: 9px;
+}
